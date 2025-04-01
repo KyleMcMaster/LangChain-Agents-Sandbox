@@ -1,16 +1,18 @@
-from langchain_anthropic import ChatAnthropic
-from langchain_community.tools.tavily_search import TavilySearchResults
+from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.prebuilt import create_react_agent
+import langgraph.graph as graph
 
 def run_agent():
     # Create the agent
     memory = MemorySaver()
-    model = ChatAnthropic(model_name="claude-3-sonnet-20240229")
-    search = TavilySearchResults(max_results=2)
-    tools = [search]
+    model = ChatOpenAI(model_name="gpt-4")  # Changed to OpenAI's GPT-4
+    tools = []  # Initialize with empty tools collection
     agent_executor = create_react_agent(model, tools, checkpointer=memory)
+
+    # Export the graph as PNG
+    graph.export_graph(agent_executor, "agent_graph.png")
 
     # Use the agent
     config = {"configurable": {"thread_id": "abc123"}}
