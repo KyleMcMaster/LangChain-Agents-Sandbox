@@ -10,7 +10,7 @@ Create a `.env` file in the src directory of the repo with the following content
 
 ```env
 # Development settings
-OPENAI_API_KEY=your-openai-api-key
+OPENAI_API_KEY=sk-your-openai-api-key
 ```
 
 ## Running the application
